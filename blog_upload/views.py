@@ -10,7 +10,7 @@ from blogpost import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.utils.encoding import force_bytes, force_text
+
 from django.contrib.auth import authenticate, login, logout
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
