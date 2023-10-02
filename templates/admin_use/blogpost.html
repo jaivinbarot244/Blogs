@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Blogs{% endblock title %}
+
+{% block navbar %}
+{% if user.is_authenticated %}  
+  <li class="nav-item"> 
+    <a class="nav-link" href="allblogs">All Blogs</a>
+  </li>
+    <li class="nav-item">
+        <a class="nav-link" href="createuser">Create User</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="signout">Logout</a>
+    </li>
+
+{% else %}
+
+    
+    <li class="nav-item">
+        <a class="nav-link" href="login">Login</a>
+    </li>
+    {% endif %}    
+{% endblock navbar %}
+
+{% block link %}
+
+/admin_use
+
+
+
+   
+
+{% endblock link %}
+
+{% block css %}
+#content{
+  font-family: 'Short Stack', cursive;
+}
+{% endblock css %}
+
+{% block body %}
+<div class="container my-3">
+    <div class="blog-post">
+            <h2 class="blog-post-title">{{post.title}}</h2>
+            <p class="blog-post-meta">{{post.timeStamp}} by <a href="#">{{post.author}}</a></p>
+            <img  src='/media/{{post.thumbnail}}'  width="50%" height="400"  alt="..." >
+            <hr>
+    
+            <p id="content">{{post.content}}</p>
+            <hr>
+          </div>
+          <a href="request-accepet/{{post.slug}}" role="button" class="btn btn-primary btn btn-success my-2">Accept</a>
+          <a href="request-decline/{{post.slug}}" role="button" class="btn btn-primary btn btn-danger">Decline</a>
+          </div>
+  
+{% endblock body %}

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Blogs{% endblock title %}
+
+{% block navbar %}
+{% if user.is_authenticated %}
+    <li class="nav-item">
+        <a class="nav-link" href="#">Create User</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="signout">Logout</a>
+    </li>
+
+{% else %}
+
+    
+    <li class="nav-item">
+        <a class="nav-link" href="login">Login</a>
+    </li>
+    {% endif %}    
+{% endblock navbar %}
+
+{% block link %}
+{% if user.is_authenticated %}
+/admin_use
+
+{% else %}
+
+/log_in
+{% endif %}    
+
+{% endblock link %}
+
+
+
+
+
+{% block body %}
+
+
+{% if user.is_authenticated %}
+
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>Message:</strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+{% endfor %}
+
+<div class="container my-3 mx-4">
+    <h3 align="center">Enter Details</h3>
+    <form action="createuser" method="post" >
+    {% csrf_token %}
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" name="username" aria-describedby="name" Required>
+      </div>
+    
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" class="form-control" id="fname" name="fname" aria-describedby="name" Required>
+      </div>
+    
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" class="form-control" id="lname" name="lname" aria-describedby="name" Required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="name" Required>
+    </div>
+    <div class="form-group">
+        <label for="pass1">Password</label>
+        <input type="password" class="form-control" id="pass1" name="pass1" aria-describedby="name" Required>
+    </div>
+    <div class="form-group">
+        <label for="pass2">Confirm Password</label>
+        <input type="password" class="form-control" id="pass2" name="pass2" aria-describedby="name" Required>
+    </div>
+    
+      
+     
+      
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+   </div>
+     
+{% else %}
+       <h1>Login PLease</h1> 
+{% endif %}
+
+
+
+
+{% endblock body %}

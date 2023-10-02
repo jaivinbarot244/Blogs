@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+
+{% block title %}Blogs{% endblock title %}
+
+{% block navbar %}
+{% if user.is_authenticated %}  
+  <li class="nav-item"> 
+    <a class="nav-link" href="allblogs">All Blogs</a>
+  </li>
+    <li class="nav-item">
+        <a class="nav-link" href="createuser">Create User</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="signout">Logout</a>
+    </li>
+
+{% else %}
+
+    
+    <li class="nav-item">
+        <a class="nav-link" href="login">Login</a>
+    </li>
+    {% endif %}    
+{% endblock navbar %}
+
+{% block link %}
+
+/admin_use
+
+
+
+   
+
+{% endblock link %}
+
+
+
+
+
+{% block body %}
+
+
+{% if user.is_authenticated %}
+
+<div class="container my-3" >
+{% if allPosts|length == 0 %}
+       
+<div class="alert alert-dark" role="alert">
+ No Blogs
+</div>
+        {% else %}
+        <table class="table">
+            <h2>Blogs</h2>
+            <thead>
+              <tr>
+                <th scope="col">Sno</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Author</th>
+                <th scope="col">Time</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+           
+      
+         
+  
+
+        {% for post in allPosts %}
+        <tbody>
+        <tr>
+            <th scope="row">{{ forloop.counter}}</th>
+            <td>{{post.title}}</td>
+            <td>"{{post.content |truncatechars:65  }}</td>
+            <td>{{post.author}}</td>
+            <td>{{post.timeStamp}}</td>
+            <td> <a href="/admin_use/blog_{{post.slug}}" role="button" class="btn btn-primary">Continue reading</a>
+            </td>
+          </tr>
+       
+        {% endfor %}
+    </tbody>
+</table>
+        {% endif %}
+      
+   
+</div>
+{% else %}
+       <h1>Login PLease</h1> 
+{% endif %}
+
+
+
+
+{% endblock body %}
